@@ -1,1 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keyword Density Checker | SEO Tools</title>
+    <meta name="description" content="Analyze keyword density in your content with our free SEO tool">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="../index.html" class="logo">SEOTools</a>
+            <div class="hamburger">☰</div>
+            <ul class="nav-links">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../index.html#tools">Tools</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="search-container">
+                <input type="text" class="search-bar" placeholder="Search tools...">
+                <div class="search-results"></div>
+            </div>
+        </div>
+    </nav>
 
+    <main class="tool-container">
+        <h1>Keyword Density Checker</h1>
+        <div class="tool-section">
+            <textarea id="inputText" rows="8" placeholder="Paste your content here..."></textarea>
+            <input type="text" id="keyword" placeholder="Enter target keyword">
+            <button onclick="checkDensity()" class="primary-btn">Analyze Text</button>
+            <div class="result" id="densityResult"></div>
+        </div>
+    </main>
+
+    <footer>
+        <!-- Same footer as homepage -->
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script>
+        function checkDensity() {
+            const text = document.getElementById('inputText').value.toLowerCase();
+            const keyword = document.getElementById('keyword').value.toLowerCase();
+            const words = text.split(/\s+/).filter(word => word.length > 0);
+            const matches = text.match(new RegExp(`\\b${keyword}\\b`, 'gi')) || [];
+            const density = (matches.length / words.length) * 100;
+            
+            const resultHTML = `
+                <h3>Analysis Results:</h3>
+                <p>Total Words: ${words.length}</p>
+                <p>Keyword Occurrences: ${matches.length}</p>
+                <p>Keyword Density: ${density.toFixed(2)}%</p>
+            `;
+            
+            document.getElementById('densityResult').innerHTML = resultHTML;
+        }
+    </script>
+</body>
+</html>
